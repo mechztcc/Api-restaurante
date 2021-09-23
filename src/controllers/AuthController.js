@@ -15,7 +15,6 @@ class AuthController {
 
         const passwordConfirmed = await compare(password, user.password);
 
-
         if(!passwordConfirmed) {
             return res.json({ error: 'Email or Password incorrected. '});
         }

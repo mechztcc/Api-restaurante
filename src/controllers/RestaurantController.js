@@ -5,14 +5,17 @@ const User = require('../models/User');
 class RestaurantController {
 
     async create(req, res) {
-        const { name, user_id } = req.body;
+        
+        const { id } = req.user;
 
-        const userExists = await User.findByPk(user_id);
+        const { name } = req.body;
+
+        const userExists = await User.findByPk(id);
         if(!userExists) {
             return res.json({ error: 'User not found.' });
         }
 
-        const restaurant = await Restaurant.create({ name, user_id });
+        const restaurant = await Restaurant.create({ name, user_id: id });
         return res.json(restaurant);
     }
 
@@ -24,8 +27,16 @@ class RestaurantController {
     }
 
     async listAll(req, res) {
-        
+        const { id } = req.user;
+        console.log(id);
         const restaurants = await Restaurant.findAll();
+        return res.json(restaurants);
+    }
+
+    async listAllByUserId(req, res) {
+        const { id } = req.user;
+        const restaurants = await Restaurant.findAll({ where: { user_id: id }});
+
         return res.json(restaurants);
     }
 
