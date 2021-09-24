@@ -1,7 +1,7 @@
 const Restaurant = require('../models/Restaurant');
 const User = require('../models/User');
 const Menu = require('../models/Menu');
-
+const Employee = require('../models/Employee');
 
 class RestaurantController {
 
@@ -23,7 +23,7 @@ class RestaurantController {
     async show(req, res) {
         const { id } = req.params;
 
-        const restaurant = await Restaurant.findByPk(id, { include: [{ model: Menu, as: 'menus' }]});
+        const restaurant = await Restaurant.findByPk(id, { include: [{ model: Menu, as: 'menus' }, { model: Employee, as: 'employees' }]});
         return res.json(restaurant);
     }
 
