@@ -14,6 +14,9 @@ Restaurant.init(connection);
 Plate.init(connection);
 Menu.init(connection);
 
+Restaurant.hasMany(Menu, { as: 'menus '})
+Menu.belongsTo(Restaurant, { foreignKey: 'restaurant_id', as: 'restaurants' });
+
 Menu.hasMany(Plate, { as: 'plates' });
 Plate.belongsTo(Menu, { foreignKey: 'menu_id', as: 'menu' });
 
