@@ -7,6 +7,9 @@ class Employee extends Model {
             name: DataTypes.STRING,
             login: DataTypes.STRING,
             password: DataTypes.STRING,
+            cpf: DataTypes.STRING,
+            phone: DataTypes.STRING,
+            pix: DataTypes.STRING,
             restaurant_id: DataTypes.NUMBER
         }, {
             sequelize: connection
