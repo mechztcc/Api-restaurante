@@ -3,14 +3,14 @@ const Restaurant = require('../models/Restaurant');
 
 class EmployeeController {
     async create(req, res) {
-        const { name, login, password, restaurant_id } = req.body;
+        const { name, login, password, cpf, phone, pix, restaurant_id } = req.body;
 
         const restaurantExists = await Restaurant.findByPk(restaurant_id);
         if(!restaurantExists) {
             return res.json({ error: 'Restaurant not found.' });
         }
 
-        const employee = await Employee.create({ name, login, password, restaurant_id });
+        const employee = await Employee.create({ name, login, password, cpf, phone, pix, restaurant_id });
         return res.json(employee);
     }
 
